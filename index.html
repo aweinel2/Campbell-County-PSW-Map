@@ -11,3 +11,102 @@
   <p>Interactive resource map coming soon!</p>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Campbell County Police Social Work Map</title>
+
+  <!-- Leaflet Map -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      color: #1f2937;
+    }
+
+    header {
+      background: #17365d;
+      color: white;
+      padding: 22px 30px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 6px;
+      font-size: 30px;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    #map {
+      width: 100%;
+      height: calc(100vh - 105px);
+      min-height: 600px;
+    }
+
+    .psw-popup h3 {
+      margin: 0 0 8px;
+      color: #17365d;
+    }
+
+    .psw-popup p {
+      margin: 4px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Campbell County Police Social Work Map</h1>
+    <p>Police Social Work services throughout Campbell County, Kentucky</p>
+  </header>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    // Center the map on Campbell County, Kentucky
+    const map = L.map('map').setView([38.95, -84.38], 11);
+
+    // Add the street map
+    L.tileLayer(
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+      }
+    ).addTo(map);
+
+    // Example PSW location
+    // We will replace/add departments after the base map is working.
+    const exampleMarker = L.marker([39.035, -84.456]).addTo(map);
+
+    exampleMarker.bindPopup(`
+      <div class="psw-popup">
+        <h3>Police Social Worker</h3>
+        <p><strong>Department:</strong> Example Department</p>
+        <p>PSW information will appear here.</p>
+      </div>
+    `);
+  </script>
+
+</body>
+</html>
