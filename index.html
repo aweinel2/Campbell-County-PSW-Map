@@ -13,55 +13,183 @@
   />
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+  * {
+    box-sizing: border-box;
+  }
 
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f4f6f8;
-      color: #1f2937;
-    }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #eef2f6;
+    color: #243447;
+  }
 
-    header {
-      background: #17365d;
-      color: white;
-      padding: 22px 30px;
-      text-align: center;
-    }
+  header {
+    background: linear-gradient(135deg, #17365d, #244f7d);
+    color: white;
+    padding: 28px 20px 24px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  }
 
+  header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+  }
+
+  header p {
+    margin: 8px 0 0;
+    font-size: 15px;
+    opacity: 0.9;
+  }
+
+  #addMemberBtn {
+    background: #17365d;
+    color: white;
+    border: none;
+    padding: 11px 22px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  #addMemberBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+  }
+
+  #memberForm {
+    display: none;
+    background: white;
+    max-width: 720px;
+    margin: 28px auto;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  }
+
+  #memberForm h2 {
+    margin-top: 0;
+    margin-bottom: 22px;
+    color: #17365d;
+    font-size: 26px;
+  }
+
+  #memberForm label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #334155;
+  }
+
+  #memberForm input,
+  #memberForm textarea {
+    width: 100%;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    padding: 11px 12px;
+    font-size: 14px;
+    background: #f8fafc;
+    margin-bottom: 16px;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  #memberForm input:focus,
+  #memberForm textarea:focus {
+    border-color: #244f7d;
+    box-shadow: 0 0 0 3px rgba(36,79,125,0.12);
+    background: white;
+  }
+
+  #memberForm textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  #submitMemberBtn,
+  #cancelMemberBtn {
+    border: none;
+    padding: 11px 18px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  #submitMemberBtn {
+    background: #17365d;
+    color: white;
+    margin-right: 8px;
+  }
+
+  #cancelMemberBtn {
+    background: #e2e8f0;
+    color: #334155;
+  }
+
+  #map {
+    width: 100%;
+    height: calc(100vh - 150px);
+    min-height: 600px;
+    border-top: 1px solid #d7dee8;
+  }
+
+  .psw-popup {
+    min-width: 240px;
+    text-align: center;
+    font-family: "Segoe UI", Arial, sans-serif;
+  }
+
+  .psw-popup h3 {
+    margin: 8px 0 6px;
+    color: #17365d;
+    font-size: 19px;
+  }
+
+  .psw-popup p {
+    margin: 6px 0;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .psw-popup a {
+    color: #244f7d;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .psw-popup a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 700px) {
     header h1 {
-      margin: 0 0 6px;
-      font-size: 30px;
+      font-size: 25px;
     }
 
-    header p {
-      margin: 0;
-      font-size: 15px;
+    #memberForm {
+      margin: 18px 12px;
+      padding: 22px;
     }
 
     #map {
-      width: 100%;
-      height: calc(100vh - 105px);
-      min-height: 600px;
+      min-height: 520px;
     }
-
-    .psw-popup h3 {
-      margin: 0 0 8px;
-      color: #17365d;
-    }
-
-    .psw-popup p {
-      margin: 4px 0;
-    }
-  </style>
+  }
+</style>
 </head>
 
 <body>
 
   <header>
-    <h1>Police Social Workers in Campbell County Ky</h1>
+    <h1>Police Social Workers in Campbell County </h1>
     <p>Police Social Work services throughout Campbell County, Kentucky</p>
   </header>
 <div style="text-align:center; padding:12px; background:#f4f6f8;">
