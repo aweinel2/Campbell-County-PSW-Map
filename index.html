@@ -64,7 +64,45 @@
     <h1>Police Social Workers in Campbell County Ky</h1>
     <p>Police Social Work services throughout Campbell County, Kentucky</p>
   </header>
+<div style="text-align:center; padding:12px; background:#f4f6f8;">
+  <button id="addMemberBtn" type="button">+ Add Member</button>
+</div>
+  <div id="memberForm" style="display:none; padding:20px; background:white; max-width:600px; margin:20px auto; border:1px solid #ccc; border-radius:8px;">
+  <h2>Add Your Information</h2>
 
+  <label>Name</label><br>
+  <input type="text" id="memberName" style="width:100%; margin-bottom:10px;"><br>
+
+  <label>Police Department</label><br>
+  <input type="text" id="memberDepartment" style="width:100%; margin-bottom:10px;"><br>
+
+  <label>Job Title</label><br>
+  <input type="text" id="memberJobTitle" style="width:100%; margin-bottom:10px;"><br>
+
+  <label>Department Address</label><br>
+  <input type="text" id="memberAddress" style="width:100%; margin-bottom:10px;"><br>
+
+  <label>City</label><br>
+  <input type="text" id="memberCity" style="width:100%; margin-bottom:10px;"><br>
+
+  <label>ZIP Code</label><br>
+  <input type="text" id="memberZip" style="width:100%; margin-bottom:10px;"><br>
+
+  <label>Email</label><br>
+  <input type="email" id="memberEmail" style="width:100%; margin-bottom:10px;"><br>
+
+  <label>Phone</label><br>
+  <input type="tel" id="memberPhone" style="width:100%; margin-bottom:10px;"><br>
+
+  <label>Short Bio</label><br>
+  <textarea id="memberBio" style="width:100%; margin-bottom:10px;"></textarea><br>
+
+  <label>Photo</label><br>
+  <input type="file" id="memberPhoto" accept="image/*" style="margin-bottom:15px;"><br>
+
+  <button id="submitMemberBtn" type="button">Submit Member</button>
+  <button id="cancelMemberBtn" type="button">Cancel</button>
+</div>
   <div id="map"></div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -99,6 +137,18 @@ fetch("https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_Count
     });
   });
   </script>
+  <script>
+  document.getElementById('addMemberBtn').addEventListener('click', function () {
+    document.getElementById('memberForm').style.display = 'block';
+    document.getElementById('map').style.display = 'none';
+  });
+
+  document.getElementById('cancelMemberBtn').addEventListener('click', function () {
+    document.getElementById('memberForm').style.display = 'none';
+    document.getElementById('map').style.display = 'block';
+    map.invalidateSize();
+  });
+</script>
 
 </body>
 </html>
