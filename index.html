@@ -98,17 +98,6 @@ fetch("https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_Count
       padding: [25, 25]
     });
   });
-    // Example PSW location
-    // We will replace/add departments after the base map is working.
-    const exampleMarker = L.marker([39.035, -84.456]).addTo(map);
-
-    exampleMarker.bindPopup(`
-      <div class="psw-popup">
-        <h3>Police Social Worker</h3>
-        <p><strong>Department:</strong> Example Department</p>
-        <p>PSW information will appear here.</p>
-      </div>
-    `);
   </script>
 
 </body>
