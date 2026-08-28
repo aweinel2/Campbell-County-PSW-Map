@@ -81,18 +81,21 @@ const map = L.map('map');
       }
     ).addTo(map);
 // Load Campbell County boundary
-fetch("https://services2.arcgis.com/FiaPA4ga0iQKduv3/ArcGIS/rest/services/TIGERweb_Counties_v1/FeatureServer/0/query?where=GEOID%3D%2721037%27&outFields=*&returnGeometry=true&f=geojson")
+    // Load the official Campbell County, Kentucky boundary
+fetch("https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/63/query?where=GEOID%3D%2721037%27&outFields=*&returnGeometry=true&outSR=4326&f=geojson")
   .then(response => response.json())
   .then(data => {
     const countyBoundary = L.geoJSON(data, {
       style: {
+        color: "#17365d",
         weight: 4,
+        fillColor: "#17365d",
         fillOpacity: 0.08
       }
     }).addTo(map);
 
     map.fitBounds(countyBoundary.getBounds(), {
-      padding: [20, 20]
+      padding: [25, 25]
     });
   });
     // Example PSW location
