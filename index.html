@@ -71,7 +71,11 @@
 
   <script>
     // Center the map on Campbell County, Kentucky
- const map = L.map('map').setView([38.88, -84.38], 12);
+const map = L.map('map');
+
+const campbellCountyBounds = [[38.80, -84.52], [39.13, -84.23]];
+
+map.fitBounds(campbellCountyBounds, { padding: [20, 20] });
 
     // Add the street map
     L.tileLayer(
