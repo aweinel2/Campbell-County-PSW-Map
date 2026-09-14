@@ -936,19 +936,8 @@
     }
 
     async function loadApprovedMembers() {
-      try {
-        document.getElementById('workerCount').textContent =
-          'Loading workers...';
-
-        const { data, error } = await supabaseClient
-          .from('members')
-          .select('*')
-          .eq('approved', true)
-          .order('name', { ascending: true });
-
-        if (error) throw error;
-
-        allMembers = data || [];
+      async function displayMembers(members) {
+        allMembers = members || [];
 
         clearMarkers();
 
@@ -972,20 +961,53 @@
         populateCities();
         renderDirectory();
 
-        if (allMembers.length){
+        if (allMembers.length) {
           setDetails(allMembers[0]);
         } else {
           const details = document.getElementById('workerDetails');
           details.className = 'details-empty';
-          details.textContent =
-            'No approved workers are currently listed.';
+          details.textContent = 'No approved workers are currently listed.';
         }
+      }
 
-      } catch (error) {
-        console.error(error);
-
+      try {
         document.getElementById('workerCount').textContent =
-          'Unable to load workers';
+          'Loading workers...';
+
+        const { data, error } = await supabaseClient
+          .from('members')
+          .select('*')
+          .eq('approved', true)
+          .order('name', { ascending: true });
+
+        if (error) throw error;
+
+        await displayMembers(data || []);
+      } catch (error) {
+        console.warn(
+          'Supabase unavailable. Loading GitHub backup.',
+          error
+        );
+
+        try {
+          document.getElementById('workerCount').textContent =
+            'Loading saved directory...';
+
+          const backupResponse = await fetch('data/workers-backup.json', {
+            cache: 'no-store'
+          });
+
+          if (!backupResponse.ok) {
+            throw new Error('Backup file unavailable');
+          }
+
+          const backupMembers = await backupResponse.json();
+          await displayMembers(backupMembers);
+        } catch (backupError) {
+          console.error('Unable to load GitHub backup:', backupError);
+          document.getElementById('workerCount').textContent =
+            'Unable to load workers';
+        }
       }
     }
 
