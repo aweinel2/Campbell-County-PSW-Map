@@ -1,18 +1,43 @@
-name: Keep Supabase Awake
+name: Keep Supabase Awake and Backup Workers
 
 on:
   schedule:
     - cron: "0 12 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  keep-awake:
+  keep-awake-and-backup:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Keep Campbell County PSW Database Active
+      - name: Check out website
+        uses: actions/checkout@v4
+
+      - name: Keep Supabase active and download approved workers
         run: |
+          mkdir -p data
+
           curl --fail --silent --show-error \
-          "https://miixtrftcwhloysjbmcs.supabase.co/rest/v1/members?select=id&limit=1" \
-          -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
-          -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
+            "https://miixtrftcwhloysjbmcs.supabase.co/rest/v1/members?select=*&approved=eq.true&order=name.asc" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -o data/workers-backup.json
+
+          test -s data/workers-backup.json
+
+      - name: Save backup to GitHub
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add data/workers-backup.json
+
+          if git diff --cached --quiet; then
+            echo "Worker backup has not changed."
+          else
+            git commit -m "Update worker backup"
+            git push
+          fi
