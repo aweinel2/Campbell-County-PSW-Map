@@ -13,6 +13,6 @@ jobs:
       - name: Keep Campbell County PSW Database Active
         run: |
           curl --fail --silent --show-error \
-          "https://miixtftcwhloysjbmcs.supabase.co/rest/v1/members?select=id&limit=1" \
+          "https://miixtrftcwhloysjbmcs.supabase.co/rest/v1/members?select=id&limit=1" \
           -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
           -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
